@@ -25,7 +25,9 @@ Now let's get rid of that noise:
 
 ![Clean plot](img/helloworld_clean_plot.png)
 
-Next step is to convert this stream of highs and lows to something meaningful. I'm ready to capture all button presses and decode the bytes. See the [HTML version](raw/master/helloworld.html) of the [notebook](helloworld.ipnb) for the source code of generating the above plots.
+Next step is to convert this stream of highs and lows to something meaningful. I'm ready to capture all button presses and decode the bytes.
+
+Please see the [HTML version](https://cdn.rawgit.com/simlun/reverse-engineering-emw200ta-433mhz-transmitter/master/helloworld.html) of the [notebook](helloworld.ipnb) to enjoy the Python source code for generating the above plots.
 
 
 Decoding Highs and Lows
