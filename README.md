@@ -9,11 +9,15 @@ This repository documents my work of reverse engineering an RF transmitter so I 
 Hello World
 -----------
 
-I captured the signal of pressing one button with my Rigol DS1052E oscilloscope:
+Let's see if I can capture data from the above transmitter using an off-the-shelf RF receiver:
+
+![RF Receiver](img/off-the-shelf_receiver.jpg)
+
+I successfully captured the signal of pressing one button with my Rigol DS1052E oscilloscope:
 
 ![Oscilloscope screenshot](img/helloworld.png)
 
-Then I saved it as CSV and using [Jupyter Notebook](http://jupyter.readthedocs.org) I parsed and manipulated the captured data. First let's compare the [Matplotlib](http://matplotlib.org) plot with the above scope screenshot:
+After saving the data as CSV I used [Jupyter Notebook](http://jupyter.readthedocs.org) to parse and manipulate it. First let's compare the above screenshot with my [Matplotlib](http://matplotlib.org) plot:
 
 ![Plotted CSV data](img/helloworld_plot.png)
 
@@ -21,20 +25,38 @@ Now let's get rid of that noise:
 
 ![Clean plot](img/helloworld_clean_plot.png)
 
-See the [HTML version](helloworld.html) of the [notebook](helloworld.ipnb) for the source code of generating the above plots.
+Next step is to convert this stream of highs and lows to something meaningful. I'm ready to capture all button presses and decode the bytes. See the [HTML version](raw/master/helloworld.html) of the [notebook](helloworld.ipnb) for the source code of generating the above plots.
 
 
+Decoding Highs and Lows
+-----------------------
+
+TODO: figure out a HEX representation of the above binary stream.
 
 
-Prerequisites
--------------
+The Reverse Engineered Bits
+---------------------------
+
+TODO: capture all button presses and document all data the transmitter is sending.
+
+
+Create My Own Transmitter
+-------------------------
+
+TODO: send the above signals using an off-the-shelf RF transmitter:
+
+![RF Transmitter](img/off-the-shelf_transmitter.jpg)
+
+
+Development
+-----------
 
 * Install [Anaconda](https://www.continuum.io/downloads) (v2.7.1 was used)
 * Open the notebook with `jupyter notebook`
 
 
-Documentation
--------------
+References
+----------
 
 * https://fetzerch.github.io/2014/11/15/reveng433/
 * http://mightydevices.com/?p=300
