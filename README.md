@@ -76,10 +76,25 @@ Button 3 OFF: 000101010 10100 01010101 00 0
 ```
 
 
+Signal Details
+--------------
+
+Before being able to replicate the above messages with my own transmitter I need to figure out the exact timings of the signals. That I did in the [signal_details.ipynb](signal_details.ipynb#Calculating-Signal-Details) notebook.
+
+Summary:
+
+* `25`-bit messages are sent at an interval of `44 120 ns` (includes a `9 620 ns` pause after the last bit).
+* Every bit is sent during `1 380 ns`.
+    * A start of `969 ns` high signal represent a digital one.
+    * A start of `284 ns` high signal represent a digital zero.
+    * The rest of the `1 380 ns` are a low signal.
+* All this adds together: `25 * 1 380 + 9 620 = 44 120`.
+
+
 Create My Own Transmitter
 -------------------------
 
-TODO: send the above signals using an off-the-shelf RF transmitter:
+TODO: Next step is to decide which microcontroller I'll use to send the above signals using the off-the-shelf RF transmitter:
 
 ![RF Transmitter](img/off-the-shelf_transmitter.jpg)
 
