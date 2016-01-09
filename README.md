@@ -79,7 +79,7 @@ Button 3 OFF: 000101010 10100 01010101 00 0
 Signal Details
 --------------
 
-Before being able to replicate the above messages with my own transmitter I need to figure out the exact timings of the signals. That I did in the [signal_details.ipynb](signal_details.ipynb#Calculating-Signal-Details) notebook.
+Before being able to replicate the above messages with my own transmitter I need to figure out the exact timings of the signals. That I did in the [signal_details](signal_details.ipynb) notebook.
 
 Summary:
 
