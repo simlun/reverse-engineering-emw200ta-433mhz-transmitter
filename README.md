@@ -31,13 +31,13 @@ Now let's get rid of that noise:
 
 Next step is to convert this stream of highs and lows to something meaningful. I'm ready to capture all button presses and decode the bytes.
 
-Please see the [HTML version](https://cdn.rawgit.com/simlun/reverse-engineering-emw200ta-433mhz-transmitter/master/helloworld.html) of the [helloworld notebook](helloworld.ipnb) to enjoy the Python source code for generating the above plots.
+Please see the [HTML version](https://cdn.rawgit.com/simlun/reverse-engineering-emw200ta-433mhz-transmitter/master/helloworld.html) of the [helloworld notebook](helloworld.ipynb) to enjoy the Python source code for generating the above plots.
 
 
 Decoding Bit Messages
 ---------------------
 
-I created a [decoder notebook](decoder.ipnb) ([HTML version](https://cdn.rawgit.com/simlun/reverse-engineering-emw200ta-433mhz-transmitter/master/decoder.html)) to help me understand the captured waveforms, enough to write an algorithm that decodes the individual messages to their pure bits. The algorithm was extracted from the notebook into [decoder.py](decoder.py). The script takes a Rigol CSV as input and prints the decoded bits one line per message:
+I created a [decoder notebook](decoder.ipynb) ([HTML version](https://cdn.rawgit.com/simlun/reverse-engineering-emw200ta-433mhz-transmitter/master/decoder.html)) to help me understand the captured waveforms, enough to write an algorithm that decodes the individual messages to their pure bits. The algorithm was extracted from the notebook into [decoder.py](decoder.py). The script takes a Rigol CSV as input and prints the decoded bits one line per message:
 
 ```
 $ python decoder.py data/a1on.csv
