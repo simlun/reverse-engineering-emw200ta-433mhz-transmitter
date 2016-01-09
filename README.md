@@ -1,7 +1,7 @@
 Reverse Engineering the EMW200TA 433 MHz Transmitter
 ====================================================
 
-This repository documents my work of reverse engineering an RF transmitter so I can control the receivers with a transmitter I build myself.
+This repository documents my work of reverse engineering an [RF transmitter](http://www.clasohlson.com/se/Fjärrströmbrytare-3-pack/Pr363570000) so I can control the receivers with a transmitter I build myself.
 
 ![Transmitters and receivers](img/transmitter_and_receivers.jpg)
 
@@ -13,7 +13,11 @@ Let's see if I can capture data from the above transmitter using an off-the-shel
 
 ![RF Receiver](img/off-the-shelf_receiver.jpg)
 
-I successfully captured the signal of pressing one button with my Rigol DS1052E oscilloscope:
+Below depicts the simple setup you need to capture a 433 MHz signal using an oscilloscope and the above RF receiver:
+
+![Oscilloscope setup](img/oscilloscope_capture.jpg)
+
+Below follows one example of a captured button press:
 
 ![Oscilloscope screenshot](img/helloworld.png)
 
@@ -27,19 +31,49 @@ Now let's get rid of that noise:
 
 Next step is to convert this stream of highs and lows to something meaningful. I'm ready to capture all button presses and decode the bytes.
 
-Please see the [HTML version](https://cdn.rawgit.com/simlun/reverse-engineering-emw200ta-433mhz-transmitter/master/helloworld.html) of the [notebook](helloworld.ipnb) to enjoy the Python source code for generating the above plots.
+Please see the [HTML version](https://cdn.rawgit.com/simlun/reverse-engineering-emw200ta-433mhz-transmitter/master/helloworld.html) of the [helloworld notebook](helloworld.ipnb) to enjoy the Python source code for generating the above plots.
 
 
-Decoding Highs and Lows
------------------------
+Decoding Bit Messages
+---------------------
 
-TODO: figure out a HEX representation of the above binary stream.
+I created a [decoder notebook](decoder.ipnb) ([HTML version](https://cdn.rawgit.com/simlun/reverse-engineering-emw200ta-433mhz-transmitter/master/decoder.html)) to help me understand the captured waveforms, enough to write an algorithm that decodes the individual messages to their pure bits. The algorithm was extracted from the notebook into [decoder.py](decoder.py). The script takes a Rigol CSV as input and prints the decoded bits one line per message:
 
+```
+$ python decoder.py data/a1on.csv
+010101010101110
+0001010100010101010101110
+0001010100010101010101110
+0001010100010101010101110
+0001010100010101010101110
+0001010100010101010101110
+0001010100010101010101110
+00010101000101010101011
+```
 
-The Reverse Engineered Bits
----------------------------
+All button presses of the transmitter were captured and decoded as follows:
 
-TODO: capture all button presses and document all data the transmitter is sending.
+```
+Button 1 ON:  0001010100010101010101110
+Button 1 OFF: 0001010100010101010101000
+Button 2 ON:  0001010101000101010101110
+Button 2 OFF: 0001010101000101010101000
+Button 3 ON:  0001010101010001010101110
+Button 3 OFF: 0001010101010001010101000
+```
+
+Let's separate the bits a bit (:D) to clarify what's changing in each button press:
+
+```
+Button 1 ON:  000101010 00101 01010101 11 0
+Button 1 OFF: 000101010 00101 01010101 00 0
+Button 2 ON:  000101010 10001 01010101 11 0
+Button 2 OFF: 000101010 10001 01010101 00 0
+Button 3 ON:  000101010 10100 01010101 11 0
+Button 3 OFF: 000101010 10100 01010101 00 0
+                        ^              ^
+                        button nr      on/off
+```
 
 
 Create My Own Transmitter
